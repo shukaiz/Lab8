@@ -9,15 +9,22 @@ import java.util.Random;
  */
 public class BankAccount {
 
-    /*
-     * You may want to use this to distinguish between different kinds of accounts.
+    /**
+     * To distinguish between different kinds of accounts.
      */
     public enum BankAccountType {
+
         CHECKINGS,
         SAVINGS,
         STUDENT,
         WORKPLACE
+
     }
+
+    /**
+     * Total amount of bank accounts opened.
+     */
+    private static int totalAccounts = 0;
 
     private int accountNumber;
     public BankAccountType accountType;
@@ -26,13 +33,57 @@ public class BankAccount {
     public double interestRate;
     private double interestEarned;
 
+    /**
+     * Setting up a bank account.
+     * @param name Name of the account owner.
+     * @param accountCategory Account type.
+     */
     public BankAccount(final String name, final BankAccountType accountCategory) {
-        /*
-         * Implement this function
-         */
+
+        this.accountType = accountCategory;
+        this.ownerName = name;
+        totalAccounts++;
+
     }
 
-    /*
-     * Implement getters and setters as appropriate for private variables.
+    /**
+     * Get the account balance.
+     * @return the account balance.
      */
+    public double getBalance() {
+        return accountBalance;
+    }
+
+    /**
+     * Withdraw money from the account.
+     * @param amount to withdraw.
+     */
+    public void getMoney(final double amount) {
+        this.accountBalance -= amount;
+    }
+
+    /**
+     * Deposit money into the account.
+     * @param amount to deposit.
+     */
+    public void addMoney(final double amount) {
+        this.accountBalance += amount;
+    }
+
+    /**
+     * Change the name of the owner.
+     * @param name The new owner name;
+     */
+    public void changeName(final String name) {
+        this.ownerName = name;
+    }
+
+    /**
+     * Get the total amount of accounts.
+     * @return the total amount of accounts.
+     */
+    public static int getAccountAmount() {
+        return totalAccounts;
+    }
+
 }

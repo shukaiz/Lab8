@@ -2,15 +2,21 @@
  * Implement a bank class.
  * <p>
  * In this lab we will model a bank. We have two classes: Bank and BankAccount. You should finish
- * both classes, by fixing checkstyle errors, defining constructors, getters and setters, and
+ * both classes, by fixing check style errors, defining constructors, getters and setters, and
  * accessing private variables.
  *
  * @see <a href="https://cs125.cs.illinois.edu/lab/8/">Lab 8 Description</a>
  */
 public class Bank {
 
-    public String bankName;
+    /**
+     * Name of the bank.
+     */
+    private String bankName;
 
+    /**
+     * Bank information.
+     */
     public Bank() {
         bankName = "Illini Bank";
     }
@@ -26,9 +32,16 @@ public class Bank {
      * @return boolean
      */
     public boolean withdrawMoney(final BankAccount bankAccount, final double amount) {
-        /*
-         * Implement this function
-         */
+
+        double balance = bankAccount.getBalance();
+
+        if (amount > balance) {
+            return false;
+        } else {
+            bankAccount.getMoney(amount);
+            return true;
+        }
+
     }
 
     /**
@@ -42,9 +55,8 @@ public class Bank {
      * @return boolean
      */
     public boolean depositMoney(final BankAccount bankAccount, final double amount) {
-        /*
-         * Implement this function
-         */
+        bankAccount.addMoney(amount);
+        return true;
     }
 
     /**
@@ -58,12 +70,20 @@ public class Bank {
      * @param amount to transfer
      * @return boolean
      */
-
     public boolean transferMoney(final BankAccount source, final BankAccount destination,
             final double amount) {
-        /*
-         * Implement this function
-         */
+
+        double balance = source.getBalance();
+
+        if (amount > balance) {
+            return false;
+        } else {
+            source.getMoney(amount);
+            destination.addMoney(amount);
+            return true;
+        }
+
+
     }
 
     /**
@@ -74,21 +94,7 @@ public class Bank {
      */
 
     public void changeOwnerName(final BankAccount bankAccount, final String name) {
-        /*
-         * Implement this function
-         */
-    }
-
-    public static int totalAccounts = 0;
-    /**
-     * Uses static variable to get number of bank accounts opened.
-     *
-     * @return the total number of accounts
-     */
-    public static int getNumberOfAccount() {
-        /*
-         * Implement this function
-         */
+        bankAccount.changeName(name);
     }
 
     /**
@@ -103,10 +109,10 @@ public class Bank {
         System.out.println("We are excited to have you banking with us!\n\n");
 
         // Create Bank Accounts
-        BankAccount account1 = new BankAccount("John Doe", BankAccountType.CHECKINGS);
+        BankAccount account1 = new BankAccount("John Doe", BankAccount.BankAccountType.CHECKINGS);
         System.out.println("Bank account for John Doe created");
 
-        BankAccount account2 = new BankAccount("Jony Ive", BankAccountType.STUDENT);
+        BankAccount account2 = new BankAccount("Jony Ive", BankAccount.BankAccountType.STUDENT);
         System.out.println("Bank account for Johy Ive created\n\n");
 
         // Deposit money to both accounts and print new balance
@@ -121,6 +127,6 @@ public class Bank {
 
         // Print number of accounts
         System.out.print("Number of active accounts at " + bank.bankName + " are ");
-        System.out.println(Bank.totalAccounts);
+        System.out.println(BankAccount.getAccountAmount());
     }
 }
