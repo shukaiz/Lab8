@@ -1,5 +1,3 @@
-import java.util.Random;
-
 /**
  * Class implementing a bank account.
  * <p>
@@ -14,9 +12,21 @@ public class BankAccount {
      */
     public enum BankAccountType {
 
+        /**
+         * Checking account.
+         */
         CHECKINGS,
+        /**
+         * Savings account.
+         */
         SAVINGS,
+        /**
+         * Student account.
+         */
         STUDENT,
+        /**
+         * Working account.
+         */
         WORKPLACE
 
     }
@@ -26,11 +36,25 @@ public class BankAccount {
      */
     private static int totalAccounts = 0;
 
-    private int accountNumber;
-    public BankAccountType accountType;
+    /**
+     * account type.
+     */
+    private BankAccountType accountType;
+    /**
+     *  account balance.
+     */
     private double accountBalance;
+    /**
+     * owner name.
+     */
     private String ownerName;
-    public double interestRate;
+    /**
+     * interest rate.
+     */
+    private double interestRate;
+    /**
+     * interest earned.
+     */
     private double interestEarned;
 
     /**
